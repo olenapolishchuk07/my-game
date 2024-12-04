@@ -6,17 +6,16 @@ const restartButton = document.getElementById("restart");
 let score = 0;
 let timeLeft = 30;
 let bubbleInterval;
-let specialBubbleInterval;
 let timerInterval;
 let bubblesPopped = 0;
 
 function handleBubbleClick(bubble, timeChange) {
-    timeLeft += timeChange; // Збільшити або зменшити час
-    score += 1; // Збільшити рахунок
-    scoreDisplay.textContent = `Score: ${score}`; // Оновити рахунок
-    bubblesPopped += 1; // Збільшити кількість попшених бульбашок
-    timerDisplay.textContent = `Time: ${timeLeft}`; // Оновити час
-    bubble.remove(); // Видалити бульбашку
+    timeLeft += timeChange;
+    score += 1;
+    scoreDisplay.textContent = `Score: ${score}`;
+    bubblesPopped += 1;
+    timerDisplay.textContent = `Time: ${timeLeft}`;
+    bubble.remove();
 }
 
 function createBubble() {
@@ -34,34 +33,10 @@ function createBubble() {
         bubble.addEventListener("click", () => handleBubbleClick(bubble, 0));
     } else if (bubbleType < 0.9) {
         bubble.classList.add("red");
-        bubble.addEventListener("click", () => handleBubbleClick(bubble, -5)); // Зменшити час на 5
+        bubble.addEventListener("click", () => handleBubbleClick(bubble, -5));
     } else {
         bubble.classList.add("gold");
-        bubble.addEventListener("click", () => handleBubbleClick(bubble, 5)); // Збільшити час на 5
-    }
-
-    gameContainer.appendChild(bubble);
-
-    setTimeout(() => {
-        bubble.remove();
-    }, parseInt(bubble.style.animationDuration) * 1000);
-}
-
-function createSpecialBubble() {
-    const bubble = document.createElement("div");
-    bubble.classList.add("bubble");
-
-    bubble.style.left = Math.random() * 90 + "%";
-    bubble.style.top = Math.random() * 90 + "%";
-    bubble.style.width = bubble.style.height = Math.random() * 30 + 30 + "px";
-    bubble.style.animationDuration = Math.random() * 4 + 4 + "s";
-
-    if (Math.random() < 0.5) {
-        bubble.classList.add("red");
-        bubble.addEventListener("click", () => handleBubbleClick(bubble, -5)); // Зменшити час на 5
-    } else {
-        bubble.classList.add("gold");
-        bubble.addEventListener("click", () => handleBubbleClick(bubble, 5)); // Збільшити час на 5
+        bubble.addEventListener("click", () => handleBubbleClick(bubble, 5));
     }
 
     gameContainer.appendChild(bubble);
@@ -81,7 +56,6 @@ function startGame() {
     restartButton.style.display = "none";
 
     bubbleInterval = setInterval(createBubble, 500);
-    specialBubbleInterval = setInterval(createSpecialBubble, 2000);
     timerInterval = setInterval(() => {
         timeLeft -= 1;
         timerDisplay.textContent = `Time: ${timeLeft}`;
@@ -93,7 +67,6 @@ function startGame() {
 
 function endGame() {
     clearInterval(bubbleInterval);
-    clearInterval(specialBubbleInterval);
     clearInterval(timerInterval);
 
     const remainingBubbles = document.querySelectorAll(".bubble");
