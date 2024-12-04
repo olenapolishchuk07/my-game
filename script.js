@@ -35,16 +35,20 @@ function createBubble() {
         bubble.classList.add("red"); // Червона бульбашка
         bubble.addEventListener("click", () => {
             timeLeft -= 5; // Зменшення часу для червоної бульбашки
-            timerDisplay.textContent = `Time: ${timeLeft}`;
+            score += 1; // Збільшення рахунку для червоної бульбашки
+            scoreDisplay.textContent = `Score: ${score}`;
             bubblesPopped += 1; // Збільшуємо лічильник лопнутих бульбашок
+            timerDisplay.textContent = `Time: ${timeLeft}`;
             bubble.remove();
         });
     } else {
         bubble.classList.add("gold"); // Золота бульбашка
         bubble.addEventListener("click", () => {
             timeLeft += 5; // Збільшення часу для золотої бульбашки
-            timerDisplay.textContent = `Time: ${timeLeft}`;
+            score += 1; // Збільшення рахунку для золотої бульбашки
+            scoreDisplay.textContent = `Score: ${score}`;
             bubblesPopped += 1; // Збільшуємо лічильник лопнутих бульбашок
+            timerDisplay.textContent = `Time: ${timeLeft}`;
             bubble.remove();
         });
     }
@@ -77,16 +81,20 @@ function createSpecialBubble() {
         bubble.classList.add("red"); // Червона бульбашка
         bubble.addEventListener("click", () => {
             timeLeft -= 3; // Зменшення часу для червоної бульбашки
-            timerDisplay.textContent = `Time: ${timeLeft}`;
+            score += 1; // Додаємо 1 до рахунку за натискання на червону бульбашку
+            scoreDisplay.textContent = `Score: ${score}`;
             bubblesPopped += 1; // Збільшуємо лічильник лопнутих бульбашок
+            timerDisplay.textContent = `Time: ${timeLeft}`;
             bubble.remove();
         });
     } else {
         bubble.classList.add("gold"); // Золота бульбашка
         bubble.addEventListener("click", () => {
             timeLeft += 5; // Збільшення часу для золотої бульбашки
-            timerDisplay.textContent = `Time: ${timeLeft}`;
+            score += 1; // Додаємо 1 до рахунку за натискання на золоту бульбашку
+            scoreDisplay.textContent = `Score: ${score}`;
             bubblesPopped += 1; // Збільшуємо лічильник лопнутих бульбашок
+            timerDisplay.textContent = `Time: ${timeLeft}`;
             bubble.remove();
         });
     }
