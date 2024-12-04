@@ -8,46 +8,43 @@ let timeLeft = 30;
 let bubbleInterval;
 let specialBubbleInterval;
 let timerInterval;
-let bubblesPopped = 0; // Лічильник лопнутих бульбашок
+let bubblesPopped = 0;
 
-// Функція для створення бульбашки
 function createBubble() {
     const bubble = document.createElement("div");
     bubble.classList.add("bubble");
 
-    // Випадкова позиція
-    bubble.style.left = Math.random() * 90 + "%"; // Випадкова горизонтальна позиція
-    bubble.style.top = Math.random() * 90 + "%"; // Випадкова вертикальна позиція
-    bubble.style.width = bubble.style.height = Math.random() * 30 + 30 + "px"; // Випадковий розмір
-    bubble.style.animationDuration = Math.random() * 4 + 4 + "s"; // Повільніша анімація (від 4 до 8 секунд)
+    bubble.style.left = Math.random() * 90 + "%";
+    bubble.style.top = Math.random() * 90 + "%";
+    bubble.style.width = bubble.style.height = Math.random() * 30 + 30 + "px";
+    bubble.style.animationDuration = Math.random() * 4 + 4 + "s";
 
-    // Випадковий тип бульбашки (80% біла, 20% спеціальна)
     const bubbleType = Math.random();
     if (bubbleType < 0.8) {
-        bubble.classList.add("white"); // Звичайна бульбашка
+        bubble.classList.add("white");
         bubble.addEventListener("click", () => {
-            score += 1; // Збільшення рахунку для білої бульбашки
-            bubblesPopped += 1; // Збільшуємо лічильник лопнутих бульбашок
+            score += 1;
+            bubblesPopped += 1;
             scoreDisplay.textContent = `Score: ${score}`;
             bubble.remove();
         });
     } else if (bubbleType < 0.9) {
-        bubble.classList.add("red"); // Червона бульбашка
+        bubble.classList.add("red");
         bubble.addEventListener("click", () => {
-            timeLeft -= 5; // Зменшення часу для червоної бульбашки
-            score += 1; // Збільшення рахунку для червоної бульбашки
+            timeLeft -= 5;
+            score += 1;
             scoreDisplay.textContent = `Score: ${score}`;
-            bubblesPopped += 1; // Збільшуємо лічильник лопнутих бульбашок
+            bubblesPopped += 1;
             timerDisplay.textContent = `Time: ${timeLeft}`;
             bubble.remove();
         });
     } else {
-        bubble.classList.add("gold"); // Золота бульбашка
+        bubble.classList.add("gold");
         bubble.addEventListener("click", () => {
-            timeLeft += 5; // Збільшення часу для золотої бульбашки
-            score += 1; // Збільшення рахунку для золотої бульбашки
+            timeLeft += 5;
+            score += 1;
             scoreDisplay.textContent = `Score: ${score}`;
-            bubblesPopped += 1; // Збільшуємо лічильник лопнутих бульбашок
+            bubblesPopped += 1;
             timerDisplay.textContent = `Time: ${timeLeft}`;
             bubble.remove();
         });
@@ -55,45 +52,37 @@ function createBubble() {
 
     gameContainer.appendChild(bubble);
 
-    // Видалення бульбашки після завершення анімації
     setTimeout(() => {
         bubble.remove();
-        if (document.body.contains(bubble) && bubble.classList.contains("white")) {
-            score -= 1; // Штраф за пропущену білу бульбашку
-            scoreDisplay.textContent = `Score: ${score}`;
-        }
-    }, parseInt(bubble.style.animationDuration) * 1000); // Чекаємо до завершення анімації
+    }, parseInt(bubble.style.animationDuration) * 1000);
 }
 
-// Функція для створення однієї червоної або золотої бульбашки
 function createSpecialBubble() {
     const bubble = document.createElement("div");
     bubble.classList.add("bubble");
 
-    // Випадкова позиція
-    bubble.style.left = Math.random() * 90 + "%"; // Випадкова горизонтальна позиція
-    bubble.style.top = Math.random() * 90 + "%"; // Випадкова вертикальна позиція
-    bubble.style.width = bubble.style.height = Math.random() * 30 + 30 + "px"; // Випадковий розмір
-    bubble.style.animationDuration = Math.random() * 4 + 4 + "s"; // Повільніша анімація (від 4 до 8 секунд)
+    bubble.style.left = Math.random() * 90 + "%";
+    bubble.style.top = Math.random() * 90 + "%";
+    bubble.style.width = bubble.style.height = Math.random() * 30 + 30 + "px";
+    bubble.style.animationDuration = Math.random() * 4 + 4 + "s";
 
-    // Випадковий вибір між червоною і золотою бульбашкою
     if (Math.random() < 0.5) {
-        bubble.classList.add("red"); // Червона бульбашка
+        bubble.classList.add("red");
         bubble.addEventListener("click", () => {
-            timeLeft -= 3; // Зменшення часу для червоної бульбашки
-            score += 1; // Додаємо 1 до рахунку за натискання на червону бульбашку
+            timeLeft -= 5;
+            score += 1;
             scoreDisplay.textContent = `Score: ${score}`;
-            bubblesPopped += 1; // Збільшуємо лічильник лопнутих бульбашок
+            bubblesPopped += 1;
             timerDisplay.textContent = `Time: ${timeLeft}`;
             bubble.remove();
         });
     } else {
-        bubble.classList.add("gold"); // Золота бульбашка
+        bubble.classList.add("gold");
         bubble.addEventListener("click", () => {
-            timeLeft += 5; // Збільшення часу для золотої бульбашки
-            score += 1; // Додаємо 1 до рахунку за натискання на золоту бульбашку
+            timeLeft += 5;
+            score += 1;
             scoreDisplay.textContent = `Score: ${score}`;
-            bubblesPopped += 1; // Збільшуємо лічильник лопнутих бульбашок
+            bubblesPopped += 1;
             timerDisplay.textContent = `Time: ${timeLeft}`;
             bubble.remove();
         });
@@ -101,27 +90,23 @@ function createSpecialBubble() {
 
     gameContainer.appendChild(bubble);
 
-    // Видалення бульбашки після завершення анімації
     setTimeout(() => {
         bubble.remove();
-    }, parseInt(bubble.style.animationDuration) * 1000); // Чекаємо до завершення анімації
+    }, parseInt(bubble.style.animationDuration) * 1000);
 }
 
-// Функція для старту гри
 function startGame() {
-    // Скидання рахунку і часу
+
     score = 0;
     timeLeft = 30;
-    bubblesPopped = 0; // Лічильник лопнутих бульбашок
+    bubblesPopped = 0;
     scoreDisplay.textContent = `Score: ${score}`;
     timerDisplay.textContent = `Time: ${timeLeft}`;
 
-    // Сховати кнопку перезавантаження
     restartButton.style.display = "none";
 
-    // Старт інтервалів
-    bubbleInterval = setInterval(createBubble, 500); // Спавн бульбашок кожні 0.5 секунди (швидше)
-    specialBubbleInterval = setInterval(createSpecialBubble, 2000); // Спавн однієї спеціальної бульбашки кожні 2 секунди (швидше)
+    bubbleInterval = setInterval(createBubble, 500);
+    specialBubbleInterval = setInterval(createSpecialBubble, 2000);
     timerInterval = setInterval(() => {
         timeLeft -= 1;
         timerDisplay.textContent = `Time: ${timeLeft}`;
@@ -131,29 +116,22 @@ function startGame() {
     }, 1000);
 }
 
-// Функція для завершення гри
 function endGame() {
-    // Очистка інтервалів
     clearInterval(bubbleInterval);
     clearInterval(specialBubbleInterval);
     clearInterval(timerInterval);
 
-    // Додаємо анімацію зникнення до всіх бульбашок
     const remainingBubbles = document.querySelectorAll(".bubble");
     remainingBubbles.forEach(bubble => {
-        bubble.classList.add("fade-out"); // Додаємо клас для анімації зникнення
+        bubble.classList.add("fade-out");
     });
 
-    // Після завершення анімації виводимо повідомлення
     setTimeout(() => {
         alert(`Game Over! You popped ${bubblesPopped} bubbles.`);
-        // Показати кнопку перезавантаження
         restartButton.style.display = "block";
-    }, 1000); // Чекаємо 1 секунду на завершення анімації
+    }, 1000);
 }
 
-// Додавання слухача події до кнопки перезавантаження
 restartButton.addEventListener("click", startGame);
 
-// Старт гри
 startGame();
